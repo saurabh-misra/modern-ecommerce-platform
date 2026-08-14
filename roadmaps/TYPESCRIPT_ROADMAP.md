@@ -2,200 +2,538 @@
 
 ## Purpose
 
-This roadmap is for a senior software engineer with strong JavaScript experience who is transitioning from a long-term ColdFusion/SQL Server background into a modern TypeScript/Node.js ecosystem.
+This roadmap is for the `modern-ecommerce-platform` project.
 
-TypeScript is one of the **three primary technology priorities** for the `modern-ecommerce-platform` project.
+TypeScript is one of the **three primary technology priorities** of the project:
 
-The goal is not to become a TypeScript type-system expert. The goal is to become strong enough to design, implement, review, and defend a production-quality TypeScript codebase at a senior engineering level.
+1. TypeScript
+2. Docker
+3. AWS
 
-## Learning Philosophy
+The developer already has substantial JavaScript and software-engineering experience. Therefore, this roadmap should **not** be approached like a beginner programming course.
+
+The goal is to become strong enough to:
+
+- write production-quality TypeScript
+- understand TypeScript's type system deeply enough to reason about it
+- model business domains safely
+- design maintainable APIs and application boundaries
+- understand compiler behavior and strict configuration
+- review TypeScript code at a senior engineering level
+- explain TypeScript decisions during technical interviews
+
+The goal is **not** to master every advanced type-system feature.
+
+---
+
+# 1. Learning Philosophy
 
 Use this loop throughout the roadmap:
 
-    Learn a concept
-        ↓
-    Do a small exercise
-        ↓
-    Apply it in a real project
-        ↓
-    Get stuck
-        ↓
-    Read official documentation
-        ↓
-    Implement the solution yourself
-        ↓
-    Ask AI to review/challenge the implementation
-        ↓
-    Fix and understand the reasoning
+```text
+Learn a concept
+      ↓
+Read the official documentation
+      ↓
+Experiment with it
+      ↓
+Write a small exercise
+      ↓
+Apply it to a realistic domain
+      ↓
+Get stuck
+      ↓
+Research the problem
+      ↓
+Implement the solution yourself
+      ↓
+Ask AI to review/challenge it
+      ↓
+Fix the weaknesses
+      ↓
+Understand why the solution is appropriate
+```
 
-Do not spend months completing courses before building.
+Do **not** spend months completing a TypeScript course before writing real code.
 
-The developer already knows JavaScript and software engineering. The objective is to learn how TypeScript changes the way code and domain models are designed.
+The preferred learning cycle is:
+
+> **Read → Experiment → Build → Review → Repeat**
 
 ---
 
-# Phase 1 — TypeScript Fundamentals
+# 2. Primary Learning Resource
+
+Use the official TypeScript documentation as the primary source.
+
+The current TypeScript Handbook recommends starting with one of its introductory guides and then proceeding to **The Basics**. The documentation explicitly provides a guide for programmers who already know JavaScript. citeturn0search0turn0search11
+
+Recommended starting sequence:
+
+```text
+TypeScript for JavaScript Programmers
+                ↓
+The Basics
+                ↓
+Everyday Types
+                ↓
+Narrowing
+                ↓
+More on Functions
+                ↓
+Object Types
+                ↓
+Generics
+                ↓
+Creating Types from Types
+                ↓
+Classes
+                ↓
+Modules
+```
+
+Official resources:
+
+- TypeScript Handbook: https://www.typescriptlang.org/docs/handbook/intro.html
+- TypeScript for JavaScript Programmers: https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html
+- The Basics: https://www.typescriptlang.org/docs/handbook/2/basic-types.html
+- Everyday Types: https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+- Narrowing: https://www.typescriptlang.org/docs/handbook/2/narrowing.html
+- Generics: https://www.typescriptlang.org/docs/handbook/2/generics.html
+
+The Handbook is intended to give everyday programmers a strong understanding of TypeScript concepts and important compiler behavior. It is not intended to be a complete language specification. citeturn0search0
+
+---
+
+# 3. Important Principle: TypeScript Is Not a New Runtime
+
+Keep this mental model throughout the roadmap:
+
+```text
+JavaScript
+    +
+TypeScript type system
+    ↓
+Compile-time checking
+    ↓
+JavaScript output
+    ↓
+JavaScript runtime
+```
+
+TypeScript is a static type checker for JavaScript programs. It does not replace JavaScript's runtime behavior. citeturn0search0turn0search11
+
+This distinction is extremely important.
+
+For example:
+
+> TypeScript can tell you at compile time that a value is expected to be a `Product`.
+
+It does **not** mean that arbitrary JSON received over HTTP is automatically a valid `Product` at runtime.
+
+Therefore:
+
+```text
+Compile-time type safety
+        ≠
+Runtime validation
+```
+
+This distinction should eventually appear throughout the e-commerce application's API design.
+
+---
+
+# 4. Phase 1 — TypeScript for JavaScript Programmers
 
 ## Goal
 
-Become comfortable reading and writing ordinary TypeScript without constantly relying on the compiler or AI to explain basic syntax.
+Understand what TypeScript adds to JavaScript without relearning JavaScript itself.
 
-## Topics
+Start with the official:
 
-### Basic types
+**TypeScript for JavaScript Programmers**
 
-Learn:
+Focus on:
 
-- string
-- number
-- boolean
-- null
-- undefined
+- type inference
+- type annotations
+- basic type checking
+- how TypeScript relates to JavaScript
+- structural typing
+- how TypeScript identifies type errors
+- what TypeScript does and does not check
+
+The official introduction emphasizes that existing JavaScript knowledge carries directly into TypeScript because TypeScript shares JavaScript's syntax and runtime behavior. citeturn0search11
+
+## Exercise
+
+Take several small JavaScript examples you already understand and convert them to TypeScript.
+
+Do not focus on frameworks yet.
+
+---
+
+# 5. Phase 2 — The Basics
+
+## Goal
+
+Understand how the TypeScript compiler reasons about values and types.
+
+Study:
+
+- primitive types
+- type annotations
+- type inference
+- object types
+- functions
+- arrays
+- unions
+- type aliases
+- interfaces
+- type assertions
+- literal types
+- `null`
+- `undefined`
+- `any`
+- `never`
+- `unknown`
+
+The current Handbook begins with **The Basics** and then moves into more detailed everyday TypeScript concepts. citeturn0search0turn0search6
+
+## Important principle
+
+Prefer inference when TypeScript can already infer the correct type.
+
+Do not add type annotations everywhere simply because the language allows it.
+
+The official documentation explicitly notes that TypeScript often infers types automatically and that fewer explicit annotations may be preferable when inference is sufficient. citeturn0search1
+
+---
+
+# 6. Phase 3 — Everyday Types
+
+## Goal
+
+Become comfortable with the types used in normal application development.
+
+Study:
+
+- `string`
+- `number`
+- `boolean`
 - arrays
 - tuples
 - objects
-- `unknown`
+- optional properties
+- function parameters
+- function return types
+- unions
+- type aliases
+- interfaces
+- literal types
+- `null`
+- `undefined`
 - `any`
-- `never`
-- `void`
+- type assertions
 
-Understand when each is appropriate.
+The official Everyday Types documentation covers these concepts as the core building blocks for more advanced TypeScript. citeturn0search1
 
-Pay particular attention to the difference between:
+## Practice with e-commerce concepts
 
-- `any`
-- `unknown`
-- `never`
-
-Do not use `any` merely to make compiler errors disappear.
-
-### Type aliases
-
-Understand:
+Model:
 
 ```text
-type User = ...
-type Product = ...
+User
+Product
+Category
+Cart
+CartItem
+Order
+OrderItem
+Payment
+Inventory
 ```
 
-Know when a type alias is appropriate.
-
-### Interfaces
-
-Understand:
+Focus on the difference between:
 
 ```text
-interface User { ... }
+What data exists?
 ```
 
-Learn the practical differences between interfaces and type aliases.
-
-### Functions
-
-Learn to type:
-
-- parameters
-- return values
-- optional parameters
-- default parameters
-- callbacks
-- function types
-
-### Optional properties
-
-Understand:
+and:
 
 ```text
-name?: string
+What data is actually valid?
 ```
-
-and how optional values affect type safety.
 
 ---
 
-# Phase 2 — Union Types and Type Narrowing
+# 7. Phase 4 — `any`, `unknown`, `never`, Nullability
 
-This is a particularly important area.
+This deserves special attention.
 
-Learn:
+Understand:
 
-- union types
-- literal types
+### `any`
+
+`any` effectively disables type checking for a value.
+
+Do not use it merely to make compiler errors disappear.
+
+The official TypeScript guidance explicitly discourages unnecessary `any`. citeturn0search10
+
+### `unknown`
+
+Understand why `unknown` is safer than `any` when receiving data whose type has not yet been established.
+
+### `never`
+
+Understand `never` as representing impossible values/paths and where it can help with exhaustive reasoning.
+
+### `null` and `undefined`
+
+Understand:
+
+- optional properties
+- nullable database values
+- strict null checking
+- safe access
 - narrowing
+
+The official documentation recommends `strictNullChecks` because unchecked null/undefined behavior is a significant source of bugs. citeturn0search1
+
+---
+
+# 8. Phase 5 — Narrowing
+
+## Goal
+
+Understand one of the most important TypeScript concepts for real application development.
+
+Study:
+
 - `typeof`
 - `instanceof`
 - `in`
-- custom type guards
+- equality checks
+- truthiness narrowing
+- control-flow analysis
 - discriminated unions
+- user-defined type guards
+- type predicates
 
-Example conceptual model:
+The TypeScript compiler analyzes JavaScript control flow and can refine a broad type into a more specific type based on runtime checks. This process is called **narrowing**. citeturn0search5
 
-    Payment
-       │
-       ├── card
-       ├── bank_transfer
-       └── wallet
+## Practice with domain states
 
-The goal is to model domain states safely rather than relying on loosely typed objects.
+For example:
 
-## Senior-level expectation
+```text
+Payment
+    ├── CardPayment
+    ├── BankTransferPayment
+    └── WalletPayment
+```
 
-Do not simply ask:
+and:
 
-> "How do I make TypeScript accept this?"
+```text
+OrderStatus
+    ├── Pending
+    ├── Confirmed
+    ├── Paid
+    ├── Shipped
+    ├── Delivered
+    └── Cancelled
+```
 
-Ask:
-
-> "What does the type actually guarantee about this value?"
+The objective is to model valid states rather than passing around loosely typed objects.
 
 ---
 
-# Phase 3 — Generics
+# 9. Phase 6 — Functions
 
-Learn:
+Study:
+
+- parameter types
+- return types
+- optional parameters
+- default parameters
+- function types
+- callbacks
+- contextual typing
+- overloads where appropriate
+- rest parameters
+
+Focus on designing clear function contracts.
+
+Ask:
+
+> What does this function accept?
+
+> What does it guarantee?
+
+> Can it fail?
+
+> How is failure represented?
+
+> Is the return type communicating something meaningful?
+
+---
+
+# 10. Phase 7 — Object Types
+
+Study:
+
+- object types
+- optional properties
+- readonly properties
+- index signatures
+- interfaces
+- type aliases
+- intersections
+- extending types
+- structural typing
+
+Understand the practical relationship between:
+
+```text
+interface
+```
+
+and:
+
+```text
+type
+```
+
+Do not turn this into a philosophical debate.
+
+The important question is:
+
+> Which representation communicates the domain model clearly and maintainably?
+
+---
+
+# 11. Phase 8 — Type Aliases, Interfaces, and Domain Modeling
+
+This is where TypeScript becomes especially valuable for the project.
+
+Practice modeling:
+
+```text
+Product
+ProductVariant
+Money
+Address
+Order
+OrderItem
+Payment
+InventoryReservation
+```
+
+Think carefully about:
+
+- required fields
+- optional fields
+- nullable fields
+- identifiers
+- state
+- immutable values
+- external IDs
+- database representations
+- API representations
+- domain representations
+
+Do not automatically use one type for every layer.
+
+Consider whether these should be different:
+
+```text
+Database model
+      ↓
+Domain model
+      ↓
+API request/response model
+```
+
+The correct answer depends on the actual architecture.
+
+---
+
+# 12. Phase 9 — Generics
+
+## Goal
+
+Understand generics as a tool for reusable, type-safe abstractions.
+
+Study:
 
 - generic functions
 - generic interfaces
 - generic types
 - generic classes
-- constraints
-- default generic parameters
+- generic constraints
+- type parameters
+- generic defaults
+- generic relationships
 
-Understand why generics exist and when they improve reuse.
+The official documentation describes generics as a mechanism for building reusable components that work across a range of types while preserving meaningful type relationships. citeturn0search2turn0search3
 
-Do not introduce generics simply to make code look sophisticated.
+## Practice
 
-Senior-level expectation:
+Use generics for realistic abstractions such as:
 
-> Use generics when they provide meaningful type safety or reusable abstractions.
+```text
+PaginatedResult<T>
+ApiResponse<T>
+Repository<T>
+Result<T>
+```
 
----
+But do not create generic abstractions merely because they are possible.
 
-# Phase 4 — Utility Types
+Senior-level question:
 
-Learn the commonly useful built-in utilities:
+> Does the generic preserve a useful relationship between types?
 
-- Partial
-- Required
-- Pick
-- Omit
-- Record
-- Readonly
-- ReturnType
-- Parameters
-- Awaited
-
-Understand how these can help model DTOs, API responses, configuration, and domain objects.
-
-Do not memorize every TypeScript utility type.
-
-Focus on the ones that solve real problems.
+If not, the abstraction may not be justified.
 
 ---
 
-# Phase 5 — Advanced Type-System Concepts
+# 13. Phase 10 — Utility Types
 
-Learn these after the fundamentals are comfortable:
+Study the commonly useful built-in utilities:
+
+- `Partial`
+- `Required`
+- `Pick`
+- `Omit`
+- `Record`
+- `Readonly`
+- `ReturnType`
+- `Parameters`
+- `Awaited`
+
+Apply them to realistic scenarios such as:
+
+```text
+UpdateProductInput
+CreateProductInput
+ProductResponse
+Pagination metadata
+Configuration
+```
+
+Do not attempt to memorize every TypeScript utility type.
+
+The objective is to recognize when a utility type solves a real problem.
+
+---
+
+# 14. Phase 11 — Creating Types from Types
+
+Once the fundamentals are comfortable, learn:
 
 - `keyof`
 - `typeof` in type positions
@@ -205,13 +543,63 @@ Learn these after the fundamentals are comfortable:
 - `infer`
 - template literal types
 
-These are useful but should not become the center of the project.
+These features are powerful but should not dominate the early learning process.
 
-The goal is practical fluency, not type-level programming for its own sake.
+## Rule
+
+> Learn advanced type manipulation when you encounter a real problem that benefits from it.
+
+Do not build elaborate type-level programming exercises simply to demonstrate TypeScript knowledge.
 
 ---
 
-# Phase 6 — Strict TypeScript Configuration
+# 15. Phase 12 — Classes and Object-Oriented TypeScript
+
+Study:
+
+- classes
+- constructors
+- properties
+- access modifiers
+- inheritance
+- abstract classes
+- implements
+- static members
+- class types
+
+Also understand when **not** to use classes.
+
+Since the main backend will use NestJS, classes will appear naturally in:
+
+- DTOs
+- services
+- providers
+- domain/application components
+- dependency injection
+
+The goal is to understand the JavaScript/TypeScript class model rather than blindly following framework conventions.
+
+---
+
+# 16. Phase 13 — Modules
+
+Study:
+
+- imports
+- exports
+- default exports
+- named exports
+- module boundaries
+- module resolution
+- circular dependencies
+
+Apply this to the eventual modular monolith.
+
+The AI should pay particular attention to whether module boundaries remain clean.
+
+---
+
+# 17. Phase 14 — Strict TypeScript Configuration
 
 This is a major project requirement.
 
@@ -225,117 +613,162 @@ Learn:
 - module resolution
 - target
 - source maps
-- declaration settings where relevant
+- build configuration
 
 The project should use strict TypeScript.
 
-Do not weaken compiler settings merely to make existing code compile.
+Do not weaken compiler settings simply to make errors disappear.
+
+The goal is to understand what the compiler is protecting you from.
 
 ---
 
-# Phase 7 — TypeScript + Node.js
+# 18. Phase 15 — First Hands-On TypeScript Project
 
-Create a small TypeScript Node.js project before starting the main e-commerce implementation.
+Do **not** wait until the entire Handbook is complete.
 
-Suggested learning project:
+Once the fundamentals are comfortable, create a small standalone project.
 
-    TypeScript
-       ↓
-    Node.js
-       ↓
-    Express
-       ↓
-    PostgreSQL
+Suggested stack:
 
-Keep this small.
+```text
+TypeScript
+    ↓
+Node.js
+    ↓
+Express
+    ↓
+PostgreSQL
+```
+
+Keep it deliberately small.
 
 Possible domain:
 
-- users
-- products
-- orders
-- payments
+```text
+Products
+Users
+Orders
+```
 
-The goal is to practice TypeScript in a real application rather than isolated exercises.
+The purpose is to practice:
 
----
+- TypeScript
+- Node.js
+- HTTP
+- REST
+- validation
+- database access
+- error handling
+- testing
 
-# Phase 8 — Domain Modeling
-
-This is where TypeScript becomes especially valuable for the e-commerce project.
-
-Practice modeling:
-
-- User
-- Product
-- Cart
-- CartItem
-- Order
-- OrderItem
-- Payment
-- Inventory
-- Shipment
-
-Think carefully about:
-
-- required vs optional fields
-- valid states
-- state transitions
-- IDs
-- money
-- dates
-- external identifiers
-- nullable database fields
-- external API responses
-
-The AI reviewer should challenge weak domain models.
+This is a learning project, not the main portfolio application.
 
 ---
 
-# Phase 9 — TypeScript + NestJS
+# 19. Phase 16 — Runtime Validation
 
-Once TypeScript fundamentals are solid, use NestJS for the main backend.
+This is a critical senior-level concept.
+
+Understand:
+
+```text
+Compile-time type
+        ≠
+Runtime data validation
+```
+
+For example:
+
+```text
+HTTP request
+    ↓
+Untrusted JSON
+    ↓
+Runtime validation
+    ↓
+Validated data
+    ↓
+TypeScript application logic
+```
+
+Study an appropriate runtime validation library when the project reaches this point.
+
+The exact library is less important than understanding the architectural boundary.
+
+The AI should challenge code that assumes external data is trustworthy merely because a TypeScript type was assigned to it.
+
+---
+
+# 20. Phase 17 — TypeScript + NestJS
+
+After the TypeScript fundamentals and small project are comfortable, move into NestJS.
 
 Learn how TypeScript interacts with:
 
-- controllers
-- services
 - modules
+- controllers
+- providers
 - dependency injection
+- services
 - DTOs
 - validation
 - guards
 - interceptors
 - decorators
-- providers
+- testing
 
-Do not memorize NestJS decorators without understanding the underlying concepts.
+Do not memorize NestJS decorators without understanding the underlying TypeScript and Node.js concepts.
 
 ---
 
-# Phase 10 — Type-Safe APIs
+# 21. Phase 18 — TypeScript + API Design
 
-Apply TypeScript to API design.
-
-Review:
+Apply TypeScript to:
 
 - request DTOs
 - response types
-- validation
-- error types
 - pagination
+- validation
+- errors
 - API contracts
 - external service responses
 
-Important distinction:
+Think carefully about whether API types should expose internal domain or database structures.
 
-> TypeScript provides compile-time safety. It does not validate untrusted runtime input.
+Important questions:
 
-External data still needs runtime validation.
+```text
+What does the API promise?
+
+What does the domain require?
+
+What does the database store?
+
+Where should transformations happen?
+```
 
 ---
 
-# Phase 11 — TypeScript Testing
+# 22. Phase 19 — TypeScript + Database
+
+Apply TypeScript to:
+
+- database entities/models
+- query results
+- repositories
+- transactions
+- nullable columns
+- database errors
+- persistence boundaries
+
+Do not blindly make database models equal to domain models.
+
+Consider the responsibilities of each layer.
+
+---
+
+# 23. Phase 20 — TypeScript Testing
 
 Use TypeScript in:
 
@@ -344,90 +777,366 @@ Use TypeScript in:
 - API tests
 - E2E tests
 
-Learn to type test fixtures and test helpers without making the tests unnecessarily complicated.
+Learn to type:
+
+- test fixtures
+- factories
+- mocks
+- test helpers
+
+Avoid making test code unnecessarily complex just to satisfy the type system.
 
 ---
 
-# Phase 12 — Senior-Level TypeScript Review
+# 24. Phase 21 — Apply TypeScript to the E-Commerce Platform
 
-Before considering TypeScript "learned", the codebase should be reviewed for:
+At this point, TypeScript becomes part of the main project.
+
+Start modeling the actual domain:
+
+```text
+Identity
+Catalog
+Cart
+Orders
+Payments
+Inventory
+Notifications
+Administration
+```
+
+Focus on meaningful domain types.
+
+Examples of questions to consider:
+
+> Can an order be shipped before payment?
+
+> Can a cancelled order become paid?
+
+> Can inventory become negative?
+
+> What happens if a payment provider returns an unknown status?
+
+> What happens if an external API sends unexpected data?
+
+TypeScript should help make invalid states harder to represent, but business rules still require runtime logic and validation.
+
+---
+
+# 25. Phase 22 — Senior-Level TypeScript Review
+
+Periodically review the codebase for:
+
+## Type safety
 
 - excessive `any`
-- unsafe type assertions
-- weak domain types
+- unsafe assertions
+- unnecessary casts
+- weak types
 - incorrect null handling
-- unnecessary generics
-- overly complicated types
-- duplicated types
-- leaking infrastructure types into business logic
-- poor API typing
-- unclear discriminated unions
-- inappropriate classes/interfaces
-- weak error modeling
-- TypeScript compiler configuration
 
-## AI review prompt
+## Domain modeling
+
+- ambiguous types
+- invalid states
+- duplicated domain definitions
+- database types leaking everywhere
+- API types leaking into business logic
+
+## Abstractions
+
+- unnecessary generics
+- unnecessary interfaces
+- overly clever types
+- premature abstractions
+- excessive indirection
+
+## Compiler configuration
+
+- strict mode
+- null checking
+- implicit any
+- build configuration
+
+## API boundaries
+
+- runtime validation
+- external data
+- error handling
+- request/response contracts
+
+---
+
+# 26. AI Code Review Prompt
 
 Use the AI agent with prompts such as:
 
-> Review this code as a senior TypeScript engineer. Do not rewrite it. Identify weak type design, unsafe assumptions, unnecessary `any`, excessive type assertions, poor domain modeling, and abstractions that are either missing or unnecessarily complex.
+> Review this code as a senior TypeScript engineer. Do not rewrite it. Identify unsafe type assumptions, excessive `any`, unnecessary type assertions, weak domain modeling, incorrect null handling, inappropriate abstractions, and places where the type system is either being underused or overused.
+
+Another useful prompt:
+
+> Review this TypeScript design from a senior engineer's perspective. Which types communicate business rules well? Which types are too weak? Which abstractions are unnecessary? Which advanced TypeScript features are justified, and which are merely clever?
 
 ---
 
-# Phase 13 — TypeScript Portfolio Milestone
+# 27. TypeScript Interview Preparation
 
-The project should eventually demonstrate:
+You should eventually be able to explain, in your own words:
+
+### Fundamentals
+
+- What TypeScript adds to JavaScript
+- Type inference
+- Type annotations
+- Structural typing
+- Interfaces vs type aliases
+- Union types
+- Intersection types
+- Literal types
+- `any`
+- `unknown`
+- `never`
+- `null` and `undefined`
+
+### Type system
+
+- Narrowing
+- Type guards
+- Discriminated unions
+- Generics
+- Generic constraints
+- Utility types
+- `keyof`
+- `typeof`
+- mapped types
+- conditional types
+
+### Runtime
+
+- TypeScript vs runtime validation
+- Compilation/transpilation
+- JavaScript runtime behavior
+
+### Engineering
+
+- strict mode
+- TypeScript configuration
+- API contracts
+- domain modeling
+- type-safe error handling
+- testing
+
+The objective is not memorized definitions.
+
+You should be able to explain:
+
+> **Why would I use this feature here?**
+
+---
+
+# 28. What NOT to Optimize For
+
+Do not optimize for:
+
+- knowing every TypeScript feature
+- writing complicated generic types
+- minimizing every explicit type annotation
+- maximizing type-level cleverness
+- using interfaces everywhere
+- avoiding classes at all costs
+- achieving zero compiler warnings through unsafe casts
+- making code "look TypeScript-y"
+
+Optimize for:
+
+```text
+Correctness
+    ↓
+Clarity
+    ↓
+Type safety
+    ↓
+Maintainability
+    ↓
+Good domain modeling
+    ↓
+Appropriate abstraction
+```
+
+---
+
+# 29. Recommended Progression
+
+The complete learning progression should look like:
+
+```text
+Phase 1
+TypeScript for JavaScript Programmers
+        ↓
+Phase 2
+The Basics
+        ↓
+Phase 3
+Everyday Types
+        ↓
+Phase 4
+any / unknown / never / nullability
+        ↓
+Phase 5
+Narrowing
+        ↓
+Phase 6
+Functions
+        ↓
+Phase 7
+Object Types
+        ↓
+Phase 8
+Domain Modeling
+        ↓
+Phase 9
+Generics
+        ↓
+Phase 10
+Utility Types
+        ↓
+Phase 11
+Advanced Type Manipulation
+        ↓
+Phase 12
+Classes
+        ↓
+Phase 13
+Modules
+        ↓
+Phase 14
+Strict TypeScript Configuration
+        ↓
+Phase 15
+Small TypeScript + Node + Express Project
+        ↓
+Phase 16
+Runtime Validation
+        ↓
+Phase 17
+NestJS
+        ↓
+Phase 18
+Type-safe API Design
+        ↓
+Phase 19
+TypeScript + Database
+        ↓
+Phase 20
+Testing
+        ↓
+Phase 21
+Main E-Commerce Application
+        ↓
+Phase 22
+Senior-Level TypeScript Review
+```
+
+This is a **progression**, not a rigid schedule.
+
+If a concept becomes relevant to the application earlier, learn it earlier.
+
+---
+
+# 30. Definition of Done
+
+TypeScript should be considered sufficiently learned for the purposes of this project when the developer can:
+
+1. Write TypeScript comfortably without constantly looking up basic syntax.
+2. Explain type inference.
+3. Use unions and narrowing confidently.
+4. Model domain states using appropriate types.
+5. Use generics when they provide meaningful value.
+6. Use utility types appropriately.
+7. Understand advanced type manipulation at a practical level.
+8. Explain `any`, `unknown`, and `never`.
+9. Handle nullability correctly.
+10. Configure TypeScript using strict settings.
+11. Distinguish compile-time types from runtime validation.
+12. Design type-safe API boundaries.
+13. Identify weak or unsafe TypeScript in a code review.
+14. Explain TypeScript tradeoffs during an interview.
+15. Write maintainable TypeScript without relying on unnecessary type-level cleverness.
+
+---
+
+# 31. Portfolio Quality Bar
+
+The final e-commerce project should demonstrate:
 
 - strict TypeScript
-- strong domain modeling
-- meaningful interfaces/types
-- appropriate generics
-- useful utility types
+- meaningful domain models
+- appropriate interfaces/types
+- useful generics
+- appropriate utility types
 - runtime validation
-- typed APIs
+- typed API contracts
+- maintainable module boundaries
 - type-safe error handling
-- maintainable abstractions
 - minimal unjustified `any`
-- readable code
+- minimal unsafe assertions
+- readable and understandable code
 
-## Definition of Done
+The project should demonstrate:
 
-The developer should be able to explain:
-
-1. Why TypeScript is being used.
-2. Where compile-time safety helps.
-3. Where runtime validation is still required.
-4. Why a particular domain type was designed the way it was.
-5. Why an interface/type/class was chosen.
-6. Why a generic was or was not introduced.
-7. How strict compiler settings improve the project.
-8. How TypeScript affects API and domain design.
+> **Strong practical TypeScript, not TypeScript tricks.**
 
 ---
 
-# Recommended Resources
+# 32. Relationship to the Other Roadmaps
 
-Start with official documentation rather than a large course.
+TypeScript should be learned first and then continuously applied while learning Docker and AWS.
 
-Primary:
+```text
+TypeScript
+    ↓
+Application
+    ↓
+Docker
+    ↓
+AWS
+```
 
-- TypeScript Handbook
-- Everyday Types
-- Generics
-- Narrowing
-- Utility Types
-- TypeScript TSConfig Reference
+The technologies reinforce one another.
 
-Use tutorials only when a concept is difficult to understand from the documentation.
+For example:
+
+```text
+TypeScript application
+        ↓
+Dockerized application
+        ↓
+AWS deployment
+```
+
+Do not wait until TypeScript is "perfect" before beginning Docker or AWS.
+
+The roadmaps can overlap once the fundamentals are solid.
 
 ---
 
-# Priority
+# 33. Final Guiding Principle
 
-**PRIMARY**
+The most important TypeScript question is not:
 
-TypeScript is one of the three main learning goals of the overall project.
+> "How do I type this?"
 
-The objective is not merely to have `.ts` files.
+It is:
 
-The objective is to demonstrate that the developer can use TypeScript to produce safer, clearer, and more maintainable production software.
+> **"What does this type communicate about the software and what does it guarantee?"**
+
+Use TypeScript to make the system:
+
+- safer
+- clearer
+- easier to refactor
+- easier to understand
+- easier to review
+- harder to misuse
+
+The goal is to demonstrate that TypeScript is being used as an **engineering tool for modeling and maintaining a real system**, not simply as a replacement extension for JavaScript.

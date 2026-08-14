@@ -1,0 +1,33 @@
+{
+  "name": "modern-ecommerce-platform",
+  "version": "1.0.0",
+  "description": "A production-grade e-commerce platform demonstrating modern TypeScript, Node.js, Express.js, NestJS, PostgreSQL, Redis, Docker, and AWS architecture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabh-misra/modern-ecommerce-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/saurabh-misra/modern-ecommerce-platform/issues"
+  },
+  "homepage": "https://github.com/saurabh-misra/modern-ecommerce-platform#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}

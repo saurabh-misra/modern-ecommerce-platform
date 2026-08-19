@@ -7,7 +7,8 @@ import { z } from 'zod';
 // after the application starts processing user requests.
 const EnvSchema = z.object({
     "PORT": z.coerce.number().default( 3000 ),
-    "DATABASE_URL": z.string().nonempty()
+    "DATABASE_URL": z.string().min( 1, "DATABASE_URL is required"),
+    "NODE_ENV": z.enum( [ "development", "production", "test" ] ).default( "development" )
 });
 
 // Parse the `process.env` object against the env schema.
@@ -15,6 +16,13 @@ const result = EnvSchema.safeParse( process.env );
 
 // Throw error if env config is missing or invalid.
 if( !result.success ) {
+    const details = result.error.issues
+        .map( 
+            issue => `- ${ issue.path.join( '.' ) }: ${ issue.message }`
+        )
+        .join( '/n' );
+    
+    console.error( "Application configuration is invalid.", details );
     throw new Error( "Application configuration is invalid." );
 }
 

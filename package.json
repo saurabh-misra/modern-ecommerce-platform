@@ -8,8 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "db:migrate": "node-pg-migrate -m ./migrations up",
-    "test:watch": "NODE_ENV=test vitest",
-    "test": "NODE_ENV=test vitest run"
+    "test:watch": "cross-env NODE_ENV=test vitest",
+    "test": "cross-env NODE_ENV=test vitest run"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "@types/express": "^5.0.6",
     "@types/node": "^26.2.0",
     "@types/pg": "^8.21.0",
+    "cross-env": "^10.1.0",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"

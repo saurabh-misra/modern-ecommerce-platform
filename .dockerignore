@@ -1,0 +1,16 @@
+# Exclude AI agents
+.kilo
+
+# Exclude git repo
+.git
+.gitignore
+
+# Exclude builds and packages 
+dist
+node_modules
+
+# Exclude docs
+*.md
+
+# Exclude directories
+roadmaps/

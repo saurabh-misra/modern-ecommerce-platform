@@ -1,5 +1,6 @@
-import type { Product, CreateProductInput } from "./product.types.js";
+import type { Product } from "./product.types.js";
 import type ProductsRepository from "./products.repository.js";
+import type { CreateProductInput } from "./products.schemas.js";
 
 export default class ProductService {
     constructor( private readonly repo: ProductsRepository ) {}

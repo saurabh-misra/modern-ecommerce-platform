@@ -9,8 +9,3 @@ export type ProductRow = {
     name: string,
     price: string
 }
-
-export type CreateProductInput = {
-    name: string;
-    price: number;
-};

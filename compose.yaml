@@ -21,7 +21,7 @@ services:
     environment: 
       POSTGRES_USER: ecommerce
       POSTGRES_PASSWORD: ecommerce
-      POSTGRES_DB: ecommerce
+      POSTGRES_DB: ecommerce_test
 
 volumes:
   postgres_data:

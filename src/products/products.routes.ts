@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import type { Product, CreateProductInput } from './product.types.js';
+import type { Product } from './product.types.js';
 import ProductService from './products.service.js';
-import { CreateProductSchema } from './products.schemas.js';
+import { CreateProductSchema, type CreateProductInput } from './products.schemas.js';
 import ProductsRepository from './products.repository.js';
 import z from 'zod';
 import AppError from '../errors/app-error.js';

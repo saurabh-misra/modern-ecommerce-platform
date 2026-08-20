@@ -8,8 +8,9 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "db:migrate": "node-pg-migrate -m ./migrations up",
-    "test:watch": "cross-env NODE_ENV=test vitest",
-    "test": "cross-env NODE_ENV=test vitest run"
+    "test:watch": "cross-env NODE_ENV=test DATABASE_URL=postgresql://ecommerce:ecommerce@localhost:5433/ecommerce_test vitest",
+    "test": "cross-env NODE_ENV=test DATABASE_URL=postgresql://ecommerce:ecommerce@localhost:5433/ecommerce_test vitest run",
+    "test:db:migrate": "cross-env DATABASE_URL=postgresql://ecommerce:ecommerce@localhost:5433/ecommerce_test npm run db:migrate"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,13 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^26.2.0",
-    "@types/pg": "^8.21.0",
-    "cross-env": "^10.1.0",
-    "tsx": "^4.23.12",
-    "typescript": "^7.0.2",
-    "vitest": "^4.1.11"
+    "@types/node": "^20.11.0",
+    "@types/pg": "^8.11.0",
+    "@types/supertest": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "supertest": "^7.2.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.3.3",
+    "vitest": "^3.0.5"
   }
 }

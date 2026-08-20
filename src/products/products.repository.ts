@@ -1,5 +1,6 @@
 import pool from "../db/pool.js";
-import type { Product, ProductRow, CreateProductInput } from "./product.types.js";
+import type { Product, ProductRow } from "./product.types.js";
+import type { CreateProductInput } from "./products.schemas.js";
 
 export default class ProductsRepository {
     
@@ -83,24 +84,22 @@ export default class ProductsRepository {
             `;
             const values = [ input.name, input.price ];
 
-            throw new Error( "dummy error" );
+            // Run the query and fetch the affected rowcount.
+            const { rows } = await pool.query<ProductRow>( query, values );
 
-            // // Run the query and fetch the affected rowcount.
-            // const { rows } = await pool.query<ProductRow>( query, values );
+            // If no rows are inserted/affected, return null.
+            const row = rows[0];
+            if( !row ) {
+                return null;
+            }
 
-            // // If no rows are inserted/affected, return null.
-            // const row = rows[0];
-            // if( !row ) {
-            //     return null;
-            // }
+            // Map ProductRow to Product and return it.
+            const newProduct: Product = {
+                ...row,
+                price: Number( row.price )
+            }
 
-            // // Map ProductRow to Product and return it.
-            // const newProduct: Product = {
-            //     ...row,
-            //     price: Number( row.price )
-            // }
-
-            // return newProduct;
+            return newProduct;
         } catch(error) {
             throw new Error( "Something went wrong while inserting this product.", { cause: error } );
         }

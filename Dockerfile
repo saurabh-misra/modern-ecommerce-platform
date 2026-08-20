@@ -11,6 +11,7 @@ RUN npm ci
 # Copy source code and TS config
 COPY tsconfig.json ./
 COPY ./src ./src
+COPY ./migrations ./migrations
 
 # Build the application
 RUN npm run build
